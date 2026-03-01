@@ -2,920 +2,500 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>💕 Will You Be My Girlfriend? 💕</title>
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Pacifico&family=Quicksand:wght@400;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>💕 My Heart Asks You Something...</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --rose: #e8426a;
+    --blush: #fce4ec;
+    --petal: #f48fb1;
+    --deep: #880e4f;
+    --cream: #fff9fb;
+    --soft: #ffd6e5;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  html, body {
+    min-height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+  }
 
   body {
-    font-family: 'Quicksand', sans-serif;
-    overflow-x: hidden;
-    cursor: none;
-  }
-
-  /* Custom cursor */
-  .cursor {
-    position: fixed;
-    width: 20px; height: 20px;
-    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ctext y='20' font-size='20'%3E💕%3C/text%3E%3C/svg%3E");
-    background-size: cover;
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%, -50%);
-    transition: transform 0.1s;
-  }
-
-  /* ===== NAV TABS ===== */
-  .nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    justify-content: center;
-    gap: 4px;
-    padding: 12px;
-    background: rgba(0,0,0,0.6);
-    backdrop-filter: blur(10px);
-  }
-
-  .nav-btn {
-    padding: 8px 18px;
-    border: none;
-    border-radius: 30px;
-    font-family: 'Quicksand', sans-serif;
-    font-weight: 700;
-    font-size: 13px;
-    cursor: pointer;
-    transition: all 0.3s;
-    color: #fff;
-    background: rgba(255,255,255,0.15);
-  }
-  .nav-btn:hover, .nav-btn.active { transform: scale(1.1); }
-  .nav-btn[data-page="1"].active { background: #ff6b9d; }
-  .nav-btn[data-page="2"].active { background: #6c3483; }
-  .nav-btn[data-page="3"].active { background: #1a1a2e; }
-  .nav-btn[data-page="4"].active { background: #e74c3c; }
-
-  /* ===== PAGES ===== */
-  .page { display: none; min-height: 100vh; }
-  .page.active { display: block; }
-
-  /* ========== PAGE 1: FAIRY TALE ROMANTIC ========== */
-  #page1 {
-    background: linear-gradient(180deg, #fce4ec 0%, #f8bbd0 40%, #f48fb1 100%);
+    font-family: 'Cormorant Garamond', serif;
+    background: linear-gradient(160deg, #fff0f5 0%, #fce4ec 40%, #f8bbd0 100%);
     min-height: 100vh;
-    position: relative;
-    overflow: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding-top: 70px;
+    position: relative;
+    padding: 20px 16px 40px;
   }
 
-  .petals-container {
+  /* ── Falling petals ── */
+  .petals {
     position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .petal {
+    position: absolute;
+    top: -40px;
+    font-size: 18px;
+    animation: fall linear infinite;
+    opacity: 0;
+  }
+  @keyframes fall {
+    0%   { transform: translateY(0) rotate(0deg) translateX(0px);  opacity: 0; }
+    5%   { opacity: 0.8; }
+    95%  { opacity: 0.6; }
+    100% { transform: translateY(110vh) rotate(600deg) translateX(50px); opacity: 0; }
+  }
+
+  /* ── Glowing blobs ── */
+  .blob {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(70px);
     pointer-events: none;
     z-index: 0;
   }
-
-  .petal {
-    position: absolute;
-    top: -50px;
-    font-size: 20px;
-    animation: petalFall linear infinite;
-    opacity: 0.7;
+  .blob1 { width: 300px; height: 300px; background: #ff80ab; opacity: 0.18; top: -80px; right: -80px; animation: blobDrift 10s ease-in-out infinite alternate; }
+  .blob2 { width: 250px; height: 250px; background: #f48fb1; opacity: 0.14; bottom: -60px; left: -60px; animation: blobDrift 12s ease-in-out infinite alternate-reverse; }
+  @keyframes blobDrift {
+    from { transform: translate(0, 0) scale(1); }
+    to   { transform: translate(20px, 15px) scale(1.08); }
   }
 
-  @keyframes petalFall {
-    0% { transform: translateY(-50px) rotate(0deg) translateX(0); opacity: 0.8; }
-    100% { transform: translateY(110vh) rotate(720deg) translateX(60px); opacity: 0; }
-  }
-
-  .fairy-card {
-    background: rgba(255,255,255,0.6);
-    backdrop-filter: blur(20px);
-    border: 2px solid rgba(255,255,255,0.8);
-    border-radius: 40px;
-    padding: 50px 60px;
+  /* ── Card ── */
+  .card {
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1.5px solid rgba(255, 255, 255, 0.85);
+    border-radius: 32px;
+    padding: 40px 28px 36px;
+    width: 100%;
+    max-width: 420px;
     text-align: center;
-    max-width: 560px;
     position: relative;
     z-index: 5;
-    box-shadow: 0 20px 60px rgba(233,30,99,0.2), 0 0 0 1px rgba(255,255,255,0.5);
-    animation: cardAppear 1s ease forwards;
+    box-shadow:
+      0 20px 60px rgba(232, 66, 106, 0.18),
+      0 4px 16px rgba(232, 66, 106, 0.1),
+      inset 0 1px 0 rgba(255,255,255,0.9);
+    animation: riseUp 1s cubic-bezier(0.34, 1.3, 0.64, 1) forwards;
+  }
+  @keyframes riseUp {
+    from { opacity: 0; transform: translateY(40px) scale(0.95); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
   }
 
-  @keyframes cardAppear {
-    from { opacity: 0; transform: translateY(30px) scale(0.95); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
-  }
-
-  .heart-big {
-    font-size: 80px;
-    display: block;
-    margin-bottom: 10px;
-    animation: heartbeat 1.5s ease-in-out infinite;
-  }
-
-  @keyframes heartbeat {
-    0%, 100% { transform: scale(1); }
-    14% { transform: scale(1.2); }
-    28% { transform: scale(1); }
-    42% { transform: scale(1.1); }
-    70% { transform: scale(1); }
-  }
-
-  .fairy-title {
-    font-family: 'Dancing Script', cursive;
-    font-size: 52px;
-    color: #c2185b;
-    line-height: 1.1;
-    margin-bottom: 16px;
-  }
-
-  .fairy-subtitle {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 16px;
-    color: #880e4f;
-    margin-bottom: 30px;
-    line-height: 1.7;
-  }
-
-  .fairy-poem {
-    font-family: 'Playfair Display', serif;
-    font-size: 14px;
-    color: #ad1457;
-    line-height: 1.9;
-    margin-bottom: 36px;
-    font-style: italic;
-    background: rgba(255,255,255,0.5);
-    padding: 20px;
-    border-radius: 20px;
-    border-left: 3px solid #f48fb1;
-  }
-
-  .btn-yes1 {
-    background: linear-gradient(135deg, #e91e63, #c2185b);
+  /* top ribbon */
+  .ribbon {
+    position: absolute;
+    top: -14px; left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, var(--rose), #ff80ab);
     color: white;
-    border: none;
-    padding: 16px 50px;
-    border-radius: 50px;
     font-family: 'Dancing Script', cursive;
-    font-size: 26px;
-    cursor: pointer;
-    margin: 8px;
-    box-shadow: 0 8px 25px rgba(233,30,99,0.4);
-    transition: all 0.3s;
+    font-size: 15px;
+    padding: 5px 22px;
+    border-radius: 30px;
+    white-space: nowrap;
+    box-shadow: 0 4px 12px rgba(232,66,106,0.35);
+    letter-spacing: 0.5px;
+  }
+
+  /* big heart */
+  .heart-wrap {
+    margin: 16px 0 12px;
+    position: relative;
     display: inline-block;
   }
-  .btn-yes1:hover { transform: scale(1.1) translateY(-3px); box-shadow: 0 12px 35px rgba(233,30,99,0.5); }
-
-  .btn-no1 {
-    background: rgba(255,255,255,0.5);
-    color: #e91e63;
-    border: 2px solid #e91e63;
-    padding: 14px 40px;
-    border-radius: 50px;
-    font-family: 'Dancing Script', cursive;
-    font-size: 22px;
-    cursor: pointer;
-    margin: 8px;
-    transition: all 0.3s;
-    position: relative;
-  }
-
-  .floating-hearts {
-    position: absolute;
-    font-size: 16px;
-    pointer-events: none;
-  }
-
-
-  /* ========== PAGE 2: GALAXY / COSMIC ========== */
-  #page2 {
-    background: #0a0014;
-    min-height: 100vh;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-top: 70px;
-  }
-
-  .stars-bg {
-    position: fixed;
-    inset: 0;
-    background-image:
-      radial-gradient(1px 1px at 10% 20%, white, transparent),
-      radial-gradient(1px 1px at 30% 60%, white, transparent),
-      radial-gradient(2px 2px at 50% 10%, white, transparent),
-      radial-gradient(1px 1px at 70% 40%, white, transparent),
-      radial-gradient(1px 1px at 90% 80%, white, transparent),
-      radial-gradient(1px 1px at 20% 80%, rgba(255,255,255,0.6), transparent),
-      radial-gradient(2px 2px at 60% 70%, rgba(255,255,255,0.8), transparent),
-      radial-gradient(1px 1px at 80% 20%, white, transparent),
-      radial-gradient(1px 1px at 40% 50%, rgba(255,255,255,0.5), transparent),
-      radial-gradient(1px 1px at 15% 45%, white, transparent);
-    animation: twinkle 4s ease-in-out infinite alternate;
-  }
-
-  @keyframes twinkle {
-    0% { opacity: 0.7; }
-    100% { opacity: 1; }
-  }
-
-  .nebula {
-    position: fixed;
-    border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.15;
-    animation: nebulaDrift 8s ease-in-out infinite alternate;
-  }
-  .nebula1 { width: 400px; height: 400px; background: #9c27b0; top: -100px; left: -100px; }
-  .nebula2 { width: 300px; height: 300px; background: #3f51b5; bottom: -50px; right: -50px; animation-delay: 2s; }
-  .nebula3 { width: 200px; height: 200px; background: #e91e63; top: 50%; left: 50%; animation-delay: 4s; }
-
-  @keyframes nebulaDrift {
-    0% { transform: translate(0, 0) scale(1); }
-    100% { transform: translate(30px, 20px) scale(1.1); }
-  }
-
-  .galaxy-card {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(180,100,255,0.4);
-    border-radius: 30px;
-    padding: 50px 55px;
-    text-align: center;
-    max-width: 580px;
-    position: relative;
-    z-index: 5;
-    box-shadow: 0 0 50px rgba(150,50,255,0.2), inset 0 0 30px rgba(255,255,255,0.03);
-    backdrop-filter: blur(10px);
-    animation: cardAppear 1.2s ease forwards;
-  }
-
-  .galaxy-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 42px;
-    color: #fff;
-    margin-bottom: 8px;
-    text-shadow: 0 0 30px rgba(200,100,255,0.8);
-  }
-
-  .galaxy-subtitle {
-    font-family: 'Dancing Script', cursive;
-    font-size: 28px;
-    color: #ce93d8;
-    margin-bottom: 24px;
-  }
-
-  .planet-emoji {
-    font-size: 70px;
+  .heart-main {
+    font-size: 72px;
     display: block;
-    margin-bottom: 16px;
-    animation: orbit 6s linear infinite;
-    transform-origin: center;
+    animation: heartbeat 1.6s ease-in-out infinite;
+    filter: drop-shadow(0 8px 18px rgba(232,66,106,0.4));
+    line-height: 1;
+  }
+  @keyframes heartbeat {
+    0%,100% { transform: scale(1); }
+    14%     { transform: scale(1.18); }
+    28%     { transform: scale(1); }
+    42%     { transform: scale(1.1); }
   }
 
-  @keyframes orbit {
-    0% { transform: rotate(0deg) translateX(10px) rotate(0deg); }
-    100% { transform: rotate(360deg) translateX(10px) rotate(-360deg); }
-  }
-
-  .galaxy-text {
-    font-size: 15px;
-    color: #e1bee7;
-    line-height: 1.9;
-    margin-bottom: 32px;
-  }
-
-  .btn-yes2 {
-    background: linear-gradient(135deg, #7b1fa2, #4a148c);
-    color: white;
-    border: 1px solid rgba(200,100,255,0.5);
-    padding: 15px 45px;
-    border-radius: 50px;
-    font-family: 'Playfair Display', serif;
+  /* small orbiting hearts */
+  .orbit-heart {
+    position: absolute;
     font-size: 18px;
-    cursor: pointer;
-    margin: 8px;
-    box-shadow: 0 0 25px rgba(150,50,255,0.5);
-    transition: all 0.3s;
+    animation: orbit linear infinite;
+    top: 50%; left: 50%;
+    transform-origin: 0 0;
   }
-  .btn-yes2:hover { transform: scale(1.08); box-shadow: 0 0 40px rgba(150,50,255,0.8); }
-
-  .btn-no2 {
-    background: transparent;
-    color: rgba(255,255,255,0.4);
-    border: 1px solid rgba(255,255,255,0.15);
-    padding: 13px 35px;
-    border-radius: 50px;
-    font-family: 'Quicksand', sans-serif;
-    font-size: 14px;
-    cursor: pointer;
-    margin: 8px;
-    transition: all 0.3s;
+  .orbit-heart:nth-child(2) { animation-duration: 5s; }
+  .orbit-heart:nth-child(3) { animation-duration: 7s; animation-delay: -3s; font-size: 14px; }
+  @keyframes orbit {
+    0%   { transform: rotate(0deg) translateX(48px) rotate(0deg); }
+    100% { transform: rotate(360deg) translateX(48px) rotate(-360deg); }
   }
 
-  .shooting-star {
-    position: fixed;
-    width: 2px;
-    height: 2px;
-    background: white;
-    border-radius: 50%;
-    animation: shoot linear infinite;
-    opacity: 0;
+  .title {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(34px, 9vw, 46px);
+    color: var(--deep);
+    line-height: 1.15;
+    margin-bottom: 6px;
+    animation: fadeSlide 1s 0.3s ease both;
   }
+  .title span { color: var(--rose); }
 
-  @keyframes shoot {
-    0% { transform: translateX(0) translateY(0); opacity: 1; width: 2px; }
-    100% { transform: translateX(200px) translateY(200px); opacity: 0; width: 80px; }
-  }
-
-
-  /* ========== PAGE 3: RETRO PIXEL GAME ========== */
-  #page3 {
-    background: #1a1a2e;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-top: 70px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .pixel-grid {
-    position: fixed;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(0,255,136,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,255,136,0.03) 1px, transparent 1px);
-    background-size: 30px 30px;
-  }
-
-  .pixel-card {
-    background: #16213e;
-    border: 3px solid #00ff88;
-    padding: 40px 50px;
-    text-align: center;
-    max-width: 580px;
-    width: 90%;
-    position: relative;
-    z-index: 5;
-    box-shadow: 8px 8px 0 #00ff88, 0 0 40px rgba(0,255,136,0.2);
-    image-rendering: pixelated;
-  }
-
-  /* Pixel border corners */
-  .pixel-card::before {
-    content: '▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓';
-    position: absolute;
-    top: -22px; left: -3px;
-    font-size: 10px;
-    color: #00ff88;
-    letter-spacing: 2px;
-  }
-  .pixel-card::after {
-    content: '▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓';
-    position: absolute;
-    bottom: -22px; left: -3px;
-    font-size: 10px;
-    color: #00ff88;
-    letter-spacing: 2px;
-  }
-
-  .pixel-title {
-    font-family: 'Press Start 2P', cursive;
-    font-size: 16px;
-    color: #00ff88;
-    line-height: 1.8;
+  .subtitle {
+    font-size: clamp(13px, 3.5vw, 15px);
+    color: #ad1457;
+    font-style: italic;
     margin-bottom: 20px;
-    text-shadow: 0 0 10px #00ff88;
-    animation: pixelBlink 2s step-end infinite;
+    line-height: 1.6;
+    animation: fadeSlide 1s 0.5s ease both;
   }
 
-  @keyframes pixelBlink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.6; }
+  @keyframes fadeSlide {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
   }
 
-  .pixel-heart-anim {
-    font-size: 48px;
-    display: block;
-    margin: 10px 0 20px;
-    image-rendering: pixelated;
-    animation: pixelBounce 0.5s steps(2) infinite;
-  }
-
-  @keyframes pixelBounce {
-    0% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
-    100% { transform: translateY(0); }
-  }
-
-  .pixel-dialogue {
-    font-family: 'Press Start 2P', cursive;
-    font-size: 9px;
-    color: #a8ff78;
-    line-height: 2.2;
-    margin-bottom: 28px;
-    text-align: left;
-    background: rgba(0,255,136,0.05);
-    border: 1px solid rgba(0,255,136,0.2);
-    padding: 16px;
-  }
-
-  .pixel-dialogue .speaker {
-    color: #fff;
-    margin-right: 8px;
-  }
-
-  .health-bar {
+  /* divider */
+  .divider {
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-bottom: 24px;
-    font-family: 'Press Start 2P', cursive;
-    font-size: 8px;
-    color: #00ff88;
+    margin: 0 0 20px;
+    animation: fadeSlide 1s 0.6s ease both;
   }
-
-  .bar-fill {
-    flex: 1;
-    height: 16px;
-    background: rgba(0,255,136,0.1);
-    border: 1px solid #00ff88;
-    position: relative;
-    overflow: hidden;
-  }
-  .bar-fill::after {
+  .divider::before, .divider::after {
     content: '';
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 87%;
-    background: repeating-linear-gradient(90deg, #00ff88 0px, #00ff88 8px, rgba(0,255,136,0.3) 8px, rgba(0,255,136,0.3) 10px);
-    animation: barFill 2s ease forwards;
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #f48fb1, transparent);
+  }
+  .divider span { font-size: 16px; }
+
+  /* poem */
+  .poem {
+    background: rgba(255, 214, 229, 0.45);
+    border-left: 3px solid var(--petal);
+    border-radius: 0 16px 16px 0;
+    padding: 16px 18px;
+    margin-bottom: 22px;
+    font-size: clamp(13px, 3.6vw, 15px);
+    color: var(--deep);
+    font-style: italic;
+    line-height: 2;
+    text-align: left;
+    animation: fadeSlide 1s 0.7s ease both;
   }
 
-  @keyframes barFill {
-    from { width: 0%; }
-    to { width: 87%; }
-  }
-
-  .btn-yes3 {
-    background: #00ff88;
-    color: #1a1a2e;
-    border: 3px solid #a8ff78;
-    padding: 14px 36px;
-    font-family: 'Press Start 2P', cursive;
-    font-size: 11px;
-    cursor: pointer;
-    margin: 8px;
-    box-shadow: 4px 4px 0 #007a3d;
-    transition: all 0.1s;
-    text-transform: uppercase;
-  }
-  .btn-yes3:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0 #007a3d; }
-  .btn-yes3:active { transform: translate(4px, 4px); box-shadow: none; }
-
-  .btn-no3 {
-    background: transparent;
-    color: rgba(0,255,136,0.4);
-    border: 2px solid rgba(0,255,136,0.2);
-    padding: 12px 30px;
-    font-family: 'Press Start 2P', cursive;
-    font-size: 9px;
-    cursor: pointer;
-    margin: 8px;
-    transition: all 0.2s;
-  }
-
-
-  /* ========== PAGE 4: BOLD MODERN ========== */
-  #page4 {
-    background: #fff5f5;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-top: 70px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .bold-bg-shapes {
-    position: fixed;
-    inset: 0;
-    overflow: hidden;
-    pointer-events: none;
-  }
-
-  .blob1 {
-    position: absolute;
-    width: 500px; height: 500px;
-    background: #ff6b6b;
-    border-radius: 70% 30% 60% 40% / 50% 60% 40% 50%;
-    top: -150px; right: -150px;
-    opacity: 0.12;
-    animation: blobMorph 8s ease-in-out infinite;
-  }
-
-  .blob2 {
-    position: absolute;
-    width: 400px; height: 400px;
-    background: #ff4b4b;
-    border-radius: 40% 60% 30% 70% / 60% 40% 60% 40%;
-    bottom: -100px; left: -100px;
-    opacity: 0.1;
-    animation: blobMorph 10s ease-in-out infinite reverse;
-  }
-
-  @keyframes blobMorph {
-    0%, 100% { border-radius: 70% 30% 60% 40% / 50% 60% 40% 50%; }
-    33% { border-radius: 40% 60% 30% 70% / 40% 50% 60% 40%; }
-    66% { border-radius: 50% 50% 70% 30% / 30% 70% 40% 60%; }
-  }
-
-  .bold-card {
-    background: #fff;
-    border-radius: 30px;
-    padding: 60px;
-    max-width: 600px;
-    width: 90%;
-    position: relative;
-    z-index: 5;
-    box-shadow: 0 30px 80px rgba(255,100,100,0.15), 0 0 0 1px rgba(255,150,150,0.1);
-    animation: cardAppear 0.8s ease forwards;
-  }
-
-  .bold-number {
-    font-family: 'Pacifico', cursive;
-    font-size: 140px;
-    color: #fff0f0;
-    line-height: 0.8;
-    margin-bottom: -20px;
-    user-select: none;
-  }
-
-  .bold-title {
-    font-family: 'Pacifico', cursive;
-    font-size: 46px;
-    color: #e74c3c;
-    line-height: 1.1;
-    margin-bottom: 20px;
-  }
-
-  .bold-divider {
-    width: 60px;
-    height: 4px;
-    background: #e74c3c;
-    border-radius: 2px;
-    margin-bottom: 20px;
-  }
-
-  .bold-text {
-    font-size: 16px;
-    color: #555;
-    line-height: 1.9;
-    margin-bottom: 32px;
-  }
-
-  .reasons-grid {
+  /* reasons */
+  .reasons {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 32px;
-  }
-
-  .reason-item {
-    background: #fff5f5;
-    border-radius: 16px;
-    padding: 16px;
-    display: flex;
-    align-items: center;
     gap: 10px;
-    font-size: 13px;
-    color: #333;
-    font-weight: 600;
-    border: 1px solid rgba(231,76,60,0.1);
-    transition: all 0.3s;
+    margin-bottom: 28px;
+    animation: fadeSlide 1s 0.85s ease both;
   }
-  .reason-item:hover { background: #ffe0e0; transform: translateY(-2px); }
-  .reason-icon { font-size: 24px; }
+  .reason {
+    background: rgba(255,255,255,0.7);
+    border: 1px solid rgba(244,143,177,0.3);
+    border-radius: 14px;
+    padding: 12px 10px;
+    font-size: clamp(11px, 3vw, 13px);
+    color: #880e4f;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    transition: transform 0.25s, box-shadow 0.25s;
+    cursor: default;
+  }
+  .reason:active { transform: scale(0.96); }
+  .reason .icon { font-size: 24px; }
 
-  .btn-yes4 {
-    background: #e74c3c;
+  /* question */
+  .question {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(22px, 6vw, 28px);
+    color: var(--rose);
+    margin-bottom: 24px;
+    animation: fadeSlide 1s 1s ease both;
+  }
+
+  /* buttons */
+  .btns {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    animation: fadeSlide 1s 1.1s ease both;
+  }
+
+  .btn-yes {
+    background: linear-gradient(135deg, var(--rose), #c2185b);
     color: white;
     border: none;
-    padding: 18px 55px;
+    padding: 18px 28px;
     border-radius: 50px;
-    font-family: 'Pacifico', cursive;
-    font-size: 22px;
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(22px, 6vw, 28px);
     cursor: pointer;
-    margin: 8px;
-    box-shadow: 0 10px 30px rgba(231,76,60,0.35);
-    transition: all 0.3s;
+    box-shadow: 0 8px 24px rgba(232,66,106,0.4), 0 2px 6px rgba(232,66,106,0.3);
+    transition: transform 0.2s, box-shadow 0.2s;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
   }
-  .btn-yes4:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 15px 40px rgba(231,76,60,0.45); }
+  .btn-yes::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
+    border-radius: inherit;
+  }
+  .btn-yes:active { transform: scale(0.97); box-shadow: 0 4px 12px rgba(232,66,106,0.3); }
 
-  .btn-no4 {
-    background: transparent;
-    color: #bbb;
-    border: 2px solid #eee;
-    padding: 16px 40px;
+  .btn-no {
+    background: rgba(255,255,255,0.5);
+    color: #e91e63;
+    border: 1.5px solid rgba(232,66,106,0.3);
+    padding: 14px 28px;
     border-radius: 50px;
-    font-family: 'Quicksand', sans-serif;
-    font-size: 14px;
-    font-weight: 700;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(14px, 4vw, 16px);
+    font-style: italic;
     cursor: pointer;
-    margin: 8px;
     transition: all 0.3s;
+    width: 100%;
   }
 
+  .no-hint {
+    font-size: 11px;
+    color: #f48fb1;
+    font-style: italic;
+    margin-top: 4px;
+  }
 
-  /* ===== SUCCESS MODAL ===== */
-  .modal {
+  /* ── Modal ── */
+  .modal-overlay {
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.85);
-    z-index: 1000;
+    background: rgba(100, 10, 40, 0.7);
+    backdrop-filter: blur(6px);
+    z-index: 200;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
+    padding: 20px;
   }
-  .modal.show { display: flex; }
+  .modal-overlay.show { display: flex; }
 
-  .modal-box {
-    background: linear-gradient(135deg, #ff6b9d, #ff8e53);
-    border-radius: 30px;
-    padding: 60px 70px;
+  .modal {
+    background: linear-gradient(160deg, #fff0f5, #fce4ec);
+    border: 2px solid rgba(255,255,255,0.9);
+    border-radius: 32px;
+    padding: 48px 32px 40px;
     text-align: center;
-    max-width: 500px;
+    width: 100%;
+    max-width: 380px;
     animation: modalPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    box-shadow: 0 30px 80px rgba(232,66,106,0.3);
   }
-
   @keyframes modalPop {
-    from { transform: scale(0) rotate(-10deg); opacity: 0; }
-    to { transform: scale(1) rotate(0deg); opacity: 1; }
+    from { transform: scale(0.5) rotate(-8deg); opacity: 0; }
+    to   { transform: scale(1) rotate(0deg); opacity: 1; }
   }
 
-  .modal-emoji { font-size: 80px; display: block; margin-bottom: 16px; animation: heartbeat 1s infinite; }
+  .modal-heart { font-size: 70px; display: block; margin-bottom: 14px; animation: heartbeat 1.2s infinite; }
   .modal-title {
     font-family: 'Dancing Script', cursive;
-    font-size: 52px;
-    color: white;
-    margin-bottom: 12px;
-    text-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+    font-size: clamp(32px, 9vw, 44px);
+    color: var(--rose);
+    margin-bottom: 10px;
+    line-height: 1.2;
   }
-  .modal-text { font-size: 16px; color: rgba(255,255,255,0.9); line-height: 1.8; margin-bottom: 30px; }
-  .modal-close {
-    background: white;
-    color: #ff6b9d;
+  .modal-text {
+    font-size: clamp(14px, 3.8vw, 16px);
+    color: var(--deep);
+    font-style: italic;
+    line-height: 1.8;
+    margin-bottom: 28px;
+  }
+  .modal-btn {
+    background: linear-gradient(135deg, var(--rose), #c2185b);
+    color: white;
     border: none;
-    padding: 14px 40px;
+    padding: 16px 36px;
     border-radius: 50px;
     font-family: 'Dancing Script', cursive;
-    font-size: 22px;
+    font-size: clamp(20px, 5.5vw, 26px);
     cursor: pointer;
+    box-shadow: 0 8px 24px rgba(232,66,106,0.35);
+    width: 100%;
     transition: transform 0.2s;
   }
-  .modal-close:hover { transform: scale(1.05); }
+  .modal-btn:active { transform: scale(0.97); }
 
-  /* confetti particles */
-  .confetti-piece {
+  /* confetti */
+  .confetti {
     position: fixed;
-    width: 10px; height: 10px;
-    animation: confettiFall linear forwards;
-    z-index: 1001;
+    width: 8px; height: 8px;
     border-radius: 2px;
+    pointer-events: none;
+    z-index: 300;
+    animation: confettiFall linear forwards;
   }
   @keyframes confettiFall {
-    0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
-    100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+    0%   { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(110vh) rotate(800deg); opacity: 0; }
   }
 
-  /* No button escape */
-  .btn-no-wrapper { position: relative; display: inline-block; }
-
+  /* no button messages */
+  #noText { transition: all 0.2s; }
 </style>
 </head>
 <body>
-<div class="cursor" id="cursor"></div>
 
-<!-- Navigation -->
-<nav class="nav">
-  <button class="nav-btn active" data-page="1" onclick="showPage(1)">🌸 Fairy Tale</button>
-  <button class="nav-btn" data-page="2" onclick="showPage(2)">🌌 Galaxy</button>
-  <button class="nav-btn" data-page="3" onclick="showPage(3)">🎮 Pixel Game</button>
-  <button class="nav-btn" data-page="4" onclick="showPage(4)">💝 Bold Love</button>
-</nav>
+<!-- Background -->
+<div class="blob blob1"></div>
+<div class="blob blob2"></div>
+<div class="petals" id="petals"></div>
 
-<!-- SUCCESS MODAL -->
-<div class="modal" id="successModal">
-  <div class="modal-box">
-    <span class="modal-emoji">💑</span>
-    <div class="modal-title">She Said YES!! 🎉</div>
-    <div class="modal-text">You two are officially a couple now!<br>May your love story be beautiful forever. 💕</div>
-    <button class="modal-close" onclick="closeModal()">💖 We're Official! 💖</button>
+<!-- Card -->
+<div class="card">
+  <div class="ribbon">✦ A message from my heart ✦</div>
+
+  <div class="heart-wrap">
+    <span class="heart-main">💝</span>
+    <span class="orbit-heart">🌸</span>
+    <span class="orbit-heart">✨</span>
+  </div>
+
+  <div class="title">Will You Be<br><span>My Girlfriend?</span></div>
+  <div class="subtitle">"You are every reason, every hope, and every dream I've ever had."</div>
+
+  <div class="divider"><span>🌹</span></div>
+
+  <div class="poem">
+    Every morning feels warmer knowing you exist,<br>
+    Every laugh is sweeter when shared with you,<br>
+    In a whole world full of people &amp; places —<br>
+    my heart keeps finding its way back to you. 🌷
+  </div>
+
+  <div class="reasons">
+    <div class="reason"><span class="icon">😊</span>Your smile lights my world</div>
+    <div class="reason"><span class="icon">💬</span>I love every talk we have</div>
+    <div class="reason"><span class="icon">🤍</span>You make me feel safe</div>
+    <div class="reason"><span class="icon">✨</span>You're truly special</div>
+  </div>
+
+  <div class="question">So... what do you say? 🥺</div>
+
+  <div class="btns">
+    <button class="btn-yes" onclick="sayYes()">💖 Yes, I Will! 💖</button>
+    <button class="btn-no" id="noBtn" onclick="noClick()" ontouchstart="noClick()">
+      <span id="noText">Hmm, let me think... 😅</span>
+    </button>
+    <div class="no-hint" id="noHint">*(psst — the yes button is much better 😉)*</div>
   </div>
 </div>
 
-<!-- ===== PAGE 1: FAIRY TALE ===== -->
-<div class="page active" id="page1">
-  <div class="petals-container" id="petalsContainer"></div>
-  <div class="fairy-card">
-    <span class="heart-big">💝</span>
-    <div class="fairy-title">Will You Be<br>My Girlfriend?</div>
-    <div class="fairy-subtitle">
-      "In a world full of ordinary moments,<br>you make every second feel like magic..."
+<!-- Modal -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <span class="modal-heart">💑</span>
+    <div class="modal-title">She Said YES!!! 🎉</div>
+    <div class="modal-text">
+      You two are officially the most adorable couple! 🌸<br>
+      May your love story be filled with<br>
+      roses, laughter, and forever moments. 💕
     </div>
-    <div class="fairy-poem">
-      Every time I see your smile, my heart skips a beat,<br>
-      Every moment spent with you feels so complete.<br>
-      You're the fairytale I never thought was real,<br>
-      So I'm asking you now — how do you feel? 🌹
-    </div>
-    <div>
-      <button class="btn-yes1" onclick="sayYes()">💖 Yes, I Will! 💖</button>
-      <br>
-      <div class="btn-no-wrapper">
-        <button class="btn-no1" id="noBtn1" onmouseover="runAwayNo(this)" onclick="runAwayNo(this)">Maybe not... 😅</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ===== PAGE 2: GALAXY ===== -->
-<div class="page" id="page2">
-  <div class="stars-bg"></div>
-  <div class="nebula nebula1"></div>
-  <div class="nebula nebula2"></div>
-  <div class="nebula nebula3"></div>
-  <div class="shooting-star" style="top:20%;left:10%;animation-duration:3s;animation-delay:1s;"></div>
-  <div class="shooting-star" style="top:50%;left:30%;animation-duration:2s;animation-delay:3s;"></div>
-  <div class="shooting-star" style="top:10%;left:60%;animation-duration:4s;animation-delay:5s;"></div>
-
-  <div class="galaxy-card">
-    <span class="planet-emoji">🌙</span>
-    <div class="galaxy-title">Across the Universe</div>
-    <div class="galaxy-subtitle">I'd travel every galaxy to find you ✨</div>
-    <div class="galaxy-text">
-      Out of 7 billion people on this Earth,<br>
-      the universe somehow guided me to you.<br>
-      You're my favorite star in the infinite sky —<br>
-      the one I always look for. 🌟<br><br>
-      <strong style="color:#e1bee7;">Will you be my girlfriend?</strong>
-    </div>
-    <div>
-      <button class="btn-yes2" onclick="sayYes()">🌙 Yes, Always You 🌙</button>
-      <div class="btn-no-wrapper">
-        <button class="btn-no2" onmouseover="runAwayNo(this)" onclick="runAwayNo(this)">Maybe in another universe...</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ===== PAGE 3: PIXEL GAME ===== -->
-<div class="page" id="page3">
-  <div class="pixel-grid"></div>
-  <div class="pixel-card">
-    <div class="pixel-title">★ LOVE QUEST ★<br>LEVEL 99</div>
-    <span class="pixel-heart-anim">💗</span>
-
-    <div class="health-bar">
-      <span>LOVE:</span>
-      <div class="bar-fill"></div>
-      <span>87%</span>
-    </div>
-
-    <div class="pixel-dialogue">
-      <div style="margin-bottom:10px;"><span class="speaker">[PLAYER]:</span>I've been on many quests...</div>
-      <div style="margin-bottom:10px;"><span class="speaker">[PLAYER]:</span>Fought dragons, solved puzzles...</div>
-      <div style="margin-bottom:10px;"><span class="speaker">[PLAYER]:</span>But the hardest quest of all...</div>
-      <div style="color:#ff6b9d;"><span class="speaker">[PLAYER]:</span>...is asking YOU to be my GF! 💕</div>
-    </div>
-
-    <div>
-      <button class="btn-yes3" onclick="sayYes()">▶ [A] YES! Accept Quest</button>
-      <br>
-      <div class="btn-no-wrapper">
-        <button class="btn-no3" onmouseover="runAwayNo(this)" onclick="runAwayNo(this)">[B] Decline Quest</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ===== PAGE 4: BOLD MODERN ===== -->
-<div class="page" id="page4">
-  <div class="bold-bg-shapes">
-    <div class="blob1"></div>
-    <div class="blob2"></div>
-  </div>
-  <div class="bold-card">
-    <div class="bold-number">♡</div>
-    <div class="bold-title">Be Mine?</div>
-    <div class="bold-divider"></div>
-    <div class="bold-text">
-      I could write a thousand reasons why you mean the world to me.
-      But here are just a few that come straight from my heart:
-    </div>
-    <div class="reasons-grid">
-      <div class="reason-item"><span class="reason-icon">😂</span>You make me laugh</div>
-      <div class="reason-item"><span class="reason-icon">🌈</span>You brighten my day</div>
-      <div class="reason-item"><span class="reason-icon">💭</span>I think of you always</div>
-      <div class="reason-item"><span class="reason-icon">🤝</span>You get me</div>
-      <div class="reason-item"><span class="reason-icon">✨</span>You're special</div>
-      <div class="reason-item"><span class="reason-icon">💞</span>My heart chose you</div>
-    </div>
-    <div>
-      <button class="btn-yes4" onclick="sayYes()">💝 Yes, I'm Yours!</button>
-      <div class="btn-no-wrapper">
-        <button class="btn-no4" onmouseover="runAwayNo(this)" onclick="runAwayNo(this)">I need to think... 🤔</button>
-      </div>
-    </div>
+    <button class="modal-btn" onclick="closeModal()">💖 We're Official! 💖</button>
   </div>
 </div>
 
 <script>
-  // Custom cursor
-  document.addEventListener('mousemove', e => {
-    const c = document.getElementById('cursor');
-    c.style.left = e.clientX + 'px';
-    c.style.top = e.clientY + 'px';
-  });
-
-  // Page switching
-  function showPage(n) {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById('page' + n).classList.add('active');
-    document.querySelector(`[data-page="${n}"]`).classList.add('active');
-  }
-
-  // Petals for page 1
-  const emojis = ['🌸', '🌺', '💮', '🌷', '💐', '🌹'];
-  const container = document.getElementById('petalsContainer');
-  for (let i = 0; i < 20; i++) {
+  // ── Falling petals ──
+  const petalEmojis = ['🌸','🌺','🌷','💮','🌹','💐'];
+  const container = document.getElementById('petals');
+  for (let i = 0; i < 22; i++) {
     const p = document.createElement('div');
     p.className = 'petal';
-    p.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-    p.style.left = Math.random() * 100 + '%';
-    p.style.fontSize = (14 + Math.random() * 16) + 'px';
-    p.style.animationDuration = (5 + Math.random() * 8) + 's';
-    p.style.animationDelay = (-Math.random() * 10) + 's';
+    p.textContent = petalEmojis[Math.floor(Math.random() * petalEmojis.length)];
+    p.style.left = (Math.random() * 100) + '%';
+    p.style.fontSize = (12 + Math.random() * 14) + 'px';
+    p.style.animationDuration = (6 + Math.random() * 9) + 's';
+    p.style.animationDelay = (-Math.random() * 12) + 's';
     container.appendChild(p);
   }
 
-  // No button runs away
-  function runAwayNo(btn) {
-    const wrapper = btn.parentElement;
-    const maxX = window.innerWidth - 200;
-    const maxY = window.innerHeight - 60;
-    const x = Math.random() * maxX;
-    const y = Math.random() * maxY;
-    btn.style.position = 'fixed';
-    btn.style.left = x + 'px';
-    btn.style.top = y + 'px';
-    btn.style.zIndex = '999';
-    btn.style.transition = 'all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)';
-    btn.textContent = ['Run! 😱', 'Nope! 🏃', 'Catch me! 😂', 'Nice try! 😜'][Math.floor(Math.random()*4)];
+  // ── No button ──
+  const noMessages = [
+    "Nope, think again! 🙈",
+    "Wrong choice! 😂",
+    "Are you suuure? 🥺",
+    "Try clicking YES! 💕",
+    "My heart says YES for you! 💖",
+    "One more try... 😇",
+    "Okay but YES is right there 👆"
+  ];
+  let noCount = 0;
+
+  function noClick() {
+    const btn = document.getElementById('noBtn');
+    const text = document.getElementById('noText');
+    const hint = document.getElementById('noHint');
+    noCount++;
+    text.textContent = noMessages[Math.min(noCount - 1, noMessages.length - 1)];
+    // wobble animation
+    btn.style.transition = 'transform 0.1s';
+    btn.style.transform = 'translateX(8px)';
+    setTimeout(() => { btn.style.transform = 'translateX(-8px)'; }, 100);
+    setTimeout(() => { btn.style.transform = 'translateX(4px)'; }, 200);
+    setTimeout(() => { btn.style.transform = 'translateX(0)'; }, 300);
+    if (noCount >= 3) {
+      hint.textContent = "";
+    }
   }
 
-  // Yes button
+  // ── Yes / confetti ──
   function sayYes() {
-    // confetti
-    const colors = ['#ff6b9d', '#ffdd59', '#48dbfb', '#ff9ff3', '#54a0ff', '#00d2d3'];
-    for (let i = 0; i < 80; i++) {
+    const colors = ['#ff6b9d','#ffdd59','#ff9ff3','#54a0ff','#00d2d3','#ff6b6b','#feca57','#ff9f43'];
+    for (let i = 0; i < 100; i++) {
       const c = document.createElement('div');
-      c.className = 'confetti-piece';
-      c.style.left = Math.random() * 100 + 'vw';
+      c.className = 'confetti';
+      c.style.left = (Math.random() * 100) + 'vw';
+      c.style.top = '0';
       c.style.background = colors[Math.floor(Math.random() * colors.length)];
       c.style.width = (6 + Math.random() * 10) + 'px';
       c.style.height = (6 + Math.random() * 10) + 'px';
-      c.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
-      c.style.animationDuration = (2 + Math.random() * 3) + 's';
-      c.style.animationDelay = (Math.random() * 1) + 's';
+      c.style.borderRadius = Math.random() > 0.5 ? '50%' : '3px';
+      c.style.animationDuration = (2.5 + Math.random() * 3) + 's';
+      c.style.animationDelay = (Math.random() * 0.8) + 's';
       document.body.appendChild(c);
       setTimeout(() => c.remove(), 5000);
     }
-    document.getElementById('successModal').classList.add('show');
+    document.getElementById('modal').classList.add('show');
   }
 
   function closeModal() {
-    document.getElementById('successModal').classList.remove('show');
-    // Reset any escaped buttons
-    document.querySelectorAll('.btn-no1,.btn-no2,.btn-no3,.btn-no4').forEach(b => {
-      b.style.position = '';
-      b.style.left = '';
-      b.style.top = '';
-    });
+    document.getElementById('modal').classList.remove('show');
   }
 </script>
 </body>
